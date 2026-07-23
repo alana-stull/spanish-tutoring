@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duke Athletics · Camino a Español 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1d1d1f;
+    --ink-soft:#6e6e73;
+    --paper:#ffffff;
+    --fog:#f5f5f7;
+    --fog-2:#e8e8ed;
+    --line:#d2d2d7;
+    --navy:#032169;
+    --navy-soft:#eef1f8;
+    --green:#1a7a4c;
+    --green-soft:#e9f5ee;
+    --red:#c0392b;
+    --red-soft:#fbeceb;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:-0.01em;
+  }
+  h1,h2,h3,h4{
+    font-family:'Inter',sans-serif;
+    margin:0;
+    letter-spacing:-0.02em;
+    font-weight:700;
+  }
+  h1,h2{color:var(--navy);}
+  a{color:inherit;}
+  button{font-family:inherit;cursor:pointer;}
+  ::selection{background:var(--navy-soft);}
+
+  /* ---------- NAV ---------- */
+  .topnav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    color:var(--ink);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex; align-items:center; gap:10px; cursor:pointer;}
+  .brand-mark{
+    width:26px;height:26px;border-radius:7px;
+    background:var(--navy);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff; font-weight:700;font-size:13px;
+  }
+  .brand-text{line-height:1.15;}
+  .brand-text .top{font-size:14.5px;font-weight:600;}
+  .brand-text .sub{font-size:11.5px;color:var(--ink-soft);}
+  .nav-links{display:flex; gap:2px;}
+  .nav-links button{
+    background:transparent;border:none;color:var(--ink-soft);
+    font-size:13.5px;font-weight:500;
+    padding:9px 16px;border-radius:20px;transition:background .15s,color .15s;
+  }
+  .nav-links button:hover{background:var(--fog); color:var(--ink);}
+  .nav-links button.active{background:var(--fog); color:var(--ink); font-weight:600;}
+
+  .view{display:none; animation:fadein .3s ease;}
+  .view.active{display:block;}
+  @keyframes fadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--paper);
+    color:var(--ink);
+    padding:96px 32px 88px;
+    text-align:center;
+  }
+  .hero-inner{max-width:640px; margin:0 auto;}
+  .eyebrow{
+    font-size:13px; font-weight:600;
+    color:var(--navy); margin-bottom:18px; letter-spacing:0.01em;
+  }
+  .hero h1{font-size:clamp(36px,6vw,56px); line-height:1.08; font-weight:700; letter-spacing:-0.03em;}
+  .hero p{font-size:18px; color:var(--ink-soft); max-width:520px; margin:20px auto 0; line-height:1.55;}
+  .hero-cta{display:flex; gap:12px; margin-top:32px; flex-wrap:wrap; justify-content:center;}
+  .btn{
+    font-size:14.5px; font-weight:600;
+    padding:13px 26px; border-radius:24px; border:none;
+    transition:transform .15s, opacity .15s, background .15s;
+  }
+  .btn:hover{opacity:0.85;}
+  .btn-primary{background:var(--navy); color:var(--paper);}
+  .btn-outline{background:transparent; color:var(--ink); border:1px solid var(--line);}
+  .btn-outline:hover{background:var(--fog); opacity:1;}
+
+  .stat-row{display:flex; gap:56px; margin-top:56px; flex-wrap:wrap; justify-content:center;}
+  .stat-num{font-size:30px; font-weight:700; color:var(--ink); letter-spacing:-0.02em;}
+  .stat-label{font-size:12.5px; color:var(--ink-soft); margin-top:2px;}
+
+  /* ---------- SECTIONS ---------- */
+  .section{max-width:1040px; margin:0 auto; padding:80px 32px; border-top:1px solid var(--line);}
+  .section-head{margin-bottom:40px; max-width:620px;}
+  .section-head .eyebrow2{
+    color:var(--navy); font-size:13px; font-weight:600; margin-bottom:8px;
+  }
+  .section-head h2{font-size:32px; letter-spacing:-0.02em;}
+  .section-head p{color:var(--ink-soft); margin-top:12px; line-height:1.6; font-size:15.5px;}
+
+  .grid{display:grid; gap:18px;}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}
+
+  .card{
+    background:var(--paper); border-radius:var(--radius); padding:26px;
+    border:1px solid var(--line);
+    transition:border-color .15s, transform .15s;
+  }
+  .card:hover{border-color:#b8b8bd; transform:translateY(-2px);}
+  .card .tag{
+    display:inline-block; font-size:11.5px; font-weight:600;
+    color:var(--navy); background:var(--navy-soft); padding:4px 10px;
+    border-radius:20px; margin-bottom:14px;
+  }
+  .card h3{font-size:17px; color:var(--ink); margin-bottom:8px; font-weight:600; letter-spacing:-0.01em;}
+  .card p{font-size:14px; color:var(--ink-soft); line-height:1.55; margin:0 0 14px;}
+  .card-link{
+    font-size:13.5px; color:var(--ink);
+    text-decoration:none; font-weight:600; display:inline-flex; align-items:center; gap:5px;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:1px;
+  }
+  .card-link:hover{color:var(--navy); border-color:var(--navy);}
+
+  /* grammar quick-ref expandable */
+  .ref-card{cursor:pointer;}
+  .ref-card .ref-body{display:none; margin-top:14px; padding-top:14px; border-top:1px solid var(--line); font-size:14px; color:var(--ink); line-height:1.6;}
+  .ref-card.open .ref-body{display:block;}
+  .ref-card .ref-body table{width:100%; border-collapse:collapse; margin-top:8px; font-size:13.5px;}
+  .ref-card .ref-body td{padding:6px 8px; border-bottom:1px solid var(--fog-2);}
+  .ref-card .ref-body td:first-child{color:var(--navy); font-weight:600; width:42%;}
+  .ref-toggle{font-size:12px; color:var(--ink-soft); font-weight:500;}
+
+  /* ---------- ROSTER ---------- */
+  .roster-band{background:var(--fog); padding:80px 32px; border-top:1px solid var(--line);}
+  .roster-inner{max-width:1040px; margin:0 auto;}
+
+  .jersey-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:30px 24px;
+    text-align:center;
+    cursor:pointer;
+    transition:transform .15s, border-color .15s, box-shadow .15s;
+  }
+  .jersey-card:hover{transform:translateY(-3px); border-color:var(--ink); box-shadow:0 12px 28px rgba(0,0,0,0.06);}
+  .jersey-avatar{
+    width:56px;height:56px;border-radius:50%;
+    background:var(--navy-soft); color:var(--navy);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700; font-size:18px;
+    margin:0 auto 16px;
+  }
+  .jersey-name{
+    font-size:16px; color:var(--ink); font-weight:600; letter-spacing:-0.01em;
+  }
+  .jersey-hint{font-size:12.5px; color:var(--ink-soft); margin-top:6px;}
+
+  /* ---------- MODAL ---------- */
+  .overlay{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4);
+    z-index:100; align-items:center; justify-content:center; padding:20px;
+    backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+  }
+  .overlay.active{display:flex;}
+  .modal{
+    background:var(--paper); border-radius:20px; padding:36px; max-width:380px; width:100%;
+    text-align:center; box-shadow:0 24px 60px rgba(0,0,0,0.18); position:relative;
+    border:1px solid var(--line);
+  }
+  .modal-close{position:absolute; top:16px; right:18px; background:none; border:none; font-size:18px; color:var(--ink-soft);}
+  .modal h3{font-size:19px; color:var(--ink); margin-bottom:4px;}
+  .modal .modal-sub{font-size:13.5px; color:var(--ink-soft); margin-bottom:22px;}
+  .pin-input{
+    width:100%; text-align:center; font-size:24px; letter-spacing:0.35em;
+    padding:14px; border-radius:12px; border:1px solid var(--line); margin-bottom:14px;
+    color:var(--ink); background:var(--fog);
+  }
+  .pin-input:focus{outline:none; border-color:var(--ink); background:var(--paper);}
+  .pin-error{color:var(--red); font-size:12.5px; margin-bottom:10px; min-height:16px;}
+
+  /* ---------- DASHBOARD ---------- */
+  .dash-header{
+    background:var(--fog);
+    color:var(--ink); padding:52px 32px 60px;
+    border-bottom:1px solid var(--line);
+  }
+  .dash-header-inner{max-width:1040px; margin:0 auto; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;}
+  .dash-id{display:flex; align-items:center; gap:18px;}
+  .dash-num{
+    font-size:22px; font-weight:700; color:var(--navy);
+    background:var(--navy-soft); border-radius:12px;
+    padding:14px 18px; min-width:52px;
+  }
+  .dash-name h2{font-size:26px; color:var(--ink); font-weight:700; letter-spacing:-0.02em;}
+  .dash-name .sub{font-size:13px; color:var(--ink-soft); margin-top:4px;}
+  .switch-user{font-size:13px; font-weight:500; color:var(--ink-soft); background:none; border:1px solid var(--line); padding:9px 16px; border-radius:20px;}
+  .switch-user:hover{color:var(--ink); border-color:var(--ink);}
+
+  .progress-wrap{max-width:1040px; margin:-30px auto 0; padding:0 32px; position:relative; z-index:5;}
+  .progress-card{background:var(--paper); border-radius:var(--radius); box-shadow:0 12px 32px rgba(0,0,0,0.08); padding:26px 30px; border:1px solid var(--line);}
+  .progress-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
+  .progress-top .label{font-size:13.5px; font-weight:600; color:var(--ink);}
+  .progress-top .pct{font-size:20px; color:var(--navy); font-weight:700;}
+  .progress-track{width:100%; height:8px; background:var(--fog); border-radius:8px; overflow:hidden;}
+  .progress-fill{height:100%; background:var(--navy); border-radius:8px; transition:width .5s ease;}
+  .progress-chapters{display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;}
+  .chip{
+    font-size:12px; font-weight:500; padding:6px 13px; border-radius:20px;
+    background:var(--fog); color:var(--ink-soft);
+  }
+  .chip.done{background:var(--green-soft); color:var(--green);}
+
+  .tabs{display:flex; gap:6px; max-width:1040px; margin:38px auto 0; padding:0 32px; border-bottom:1px solid var(--line);}
+  .tab-btn{
+    font-size:14px; font-weight:500;
+    background:transparent; border:none; padding:12px 4px; color:var(--ink-soft);
+    margin-right:26px;
+    border-bottom:2px solid transparent;
+  }
+  .tab-btn.active{color:var(--ink); font-weight:600; border-bottom-color:var(--ink);}
+  .tab-panel{display:none; max-width:1040px; margin:0 auto; padding:32px;}
+  .tab-panel.active{display:block;}
+
+  /* chapter accordion */
+  .chapter{background:var(--paper); border-radius:var(--radius); border:1px solid var(--line); margin-bottom:14px; overflow:hidden;}
+  .chapter-head{display:flex; justify-content:space-between; align-items:center; padding:22px 26px; cursor:pointer;}
+  .chapter-head h3{font-size:16px; color:var(--ink); font-weight:600; letter-spacing:-0.01em;}
+  .chapter-head .meta{font-size:12.5px; color:var(--ink-soft); margin-top:4px;}
+  .chapter-status{font-size:12px; font-weight:500; padding:5px 12px; border-radius:20px; background:var(--fog); color:var(--ink-soft);}
+  .chapter-status.done{background:var(--green-soft); color:var(--green);}
+  .chapter-body{display:none; padding:0 26px 26px; border-top:1px solid var(--line);}
+  .chapter.open .chapter-body{display:block;}
+
+  .quiz-q{margin:22px 0; padding-bottom:20px; border-bottom:1px solid var(--fog-2);}
+  .quiz-q:last-of-type{border-bottom:none;}
+  .quiz-q .qtext{font-size:14.5px; color:var(--ink); margin-bottom:12px; line-height:1.5; font-weight:500;}
+  .opt-row{display:flex; flex-direction:column; gap:8px;}
+  .opt{
+    display:flex; align-items:center; gap:10px; padding:11px 15px; border:1px solid var(--line);
+    border-radius:10px; font-size:14px; cursor:pointer; transition:border-color .15s, background .15s;
+  }
+  .opt:hover{border-color:var(--ink);}
+  .opt.selected{border-color:var(--navy); background:var(--navy-soft);}
+  .opt.correct{border-color:var(--green); background:var(--green-soft);}
+  .opt.incorrect{border-color:var(--red); background:var(--red-soft);}
+  .fill-input{
+    width:100%; max-width:280px; padding:11px 15px; border:1px solid var(--line); border-radius:10px;
+    font-size:14px; font-family:'Inter';
+  }
+  .fill-input:focus{outline:none; border-color:var(--ink);}
+  .fill-input.correct{border-color:var(--green); background:var(--green-soft);}
+  .fill-input.incorrect{border-color:var(--red); background:var(--red-soft);}
+  .q-feedback{font-size:12.5px; margin-top:7px; font-weight:600;}
+  .q-feedback.correct{color:var(--green);}
+  .q-feedback.incorrect{color:var(--red);}
+
+  .quiz-actions{display:flex; align-items:center; gap:16px; margin-top:18px;}
+  .quiz-score{font-size:13.5px; color:var(--ink); font-weight:500;}
+
+  .write-prompt{background:var(--fog); border-radius:14px; padding:18px 20px; margin-bottom:12px;}
+  .write-prompt p{font-size:14px; margin:0 0 10px; color:var(--ink);}
+  .write-check{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-soft);}
+  .reveal-btn{background:none; border:none; color:var(--ink); font-size:12.5px; font-weight:600; padding:0; margin-top:8px; border-bottom:1px solid var(--ink-soft);}
+  .reveal-answer{display:none; font-size:13px; color:var(--ink-soft); margin-top:8px; font-style:italic;}
+  .reveal-answer.show{display:block;}
+
+  /* speaking practice */
+  .speak-category{margin-bottom:32px;}
+  .speak-category h4{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:12px;}
+  .speak-item{background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin-bottom:10px;}
+  .speak-template{font-size:16px; color:var(--ink); font-weight:600; margin-bottom:4px;}
+  .speak-instruction{font-size:12.5px; color:var(--ink-soft); margin-bottom:10px;}
+  .speak-input{width:100%; max-width:320px; padding:9px 13px; border:1px solid var(--line); border-radius:9px; font-size:13.5px; margin-bottom:8px;}
+  .speak-input:focus{outline:none; border-color:var(--navy);}
+
+  .translate-toggle{background:none; border:none; color:var(--ink-soft); font-size:12px; font-weight:500; padding:0; border-bottom:1px dotted var(--ink-soft); margin-top:4px;}
+  .translate-toggle:hover{color:var(--navy); border-color:var(--navy);}
+  .translate-text{display:none; font-size:12.5px; color:var(--ink-soft); font-style:italic; margin-top:6px;}
+  .translate-text.show{display:block;}
+
+  .write-textarea{width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:10px; font-size:14px; font-family:'Inter'; resize:vertical; min-height:64px; margin-top:2px;}
+  .write-textarea:focus{outline:none; border-color:var(--navy);}
+  .write-saved{font-size:11.5px; color:var(--green); margin-top:6px; opacity:0; transition:opacity .3s;}
+  .write-saved.show{opacity:1;}
+
+  .challenge-box{background:var(--navy-soft); border-radius:14px; padding:20px 22px; margin-top:28px;}
+  .challenge-box .challenge-label{font-size:12px; font-weight:600; color:var(--navy); margin-bottom:8px;}
+  .challenge-box p.prompt{font-size:14px; color:var(--ink); margin:0 0 12px; line-height:1.55;}
+
+  .topic-block{border-top:1px solid var(--line); padding-top:22px; margin-top:22px;}
+  .chapter-body > .topic-block:first-child{border-top:none; margin-top:8px; padding-top:8px;}
+  .topic-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; flex-wrap:wrap; gap:8px;}
+  .topic-title{font-size:15px; font-weight:600; color:var(--navy);}
+
+  .more-practice-row{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:16px; padding-top:16px; border-top:1px dashed var(--line);}
+  .more-practice-label{font-size:12.5px; color:var(--ink-soft); margin-right:4px;}
+  .btn-chip{
+    font-size:12.5px; font-weight:500; color:var(--navy); background:var(--navy-soft);
+    border:none; padding:8px 14px; border-radius:20px; transition:background .15s;
+  }
+  .btn-chip:hover{background:#dfe6f5;}
+  .btn-chip:disabled{opacity:0.6; cursor:default;}
+
+  .tutor-gate{max-width:380px; margin:80px auto; text-align:center;}
+  .tutor-request{display:flex; justify-content:space-between; align-items:center; gap:14px; background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:16px 20px; margin-bottom:10px;}
+
+  /* checklist */
+  .checklist-item{display:flex; align-items:center; gap:12px; padding:15px 18px; background:var(--paper); border:1px solid var(--line); border-radius:12px; margin-bottom:10px;}
+  .checklist-item input{width:17px; height:17px; accent-color:var(--navy);}
+  .checklist-item span{font-size:14.5px; color:var(--ink);}
+  .checklist-item.checked span{text-decoration:line-through; color:var(--ink-soft);}
+
+  footer{text-align:center; padding:40px 20px; color:var(--ink-soft); font-size:12.5px; border-top:1px solid var(--line);}
+
+  @media(max-width:640px){
+    .nav-links{display:none;}
+    .hero{padding:64px 20px 56px;}
+    .dash-header-inner{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="brand" onclick="goHome()">
+    <div class="brand-mark">D</div>
+    <div class="brand-text">
+      <div class="top">Duke Athletics</div>
+      <div class="sub">Log into your card for more personalized practice</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <button data-nav="home" onclick="showView('home')">Inicio</button>
+    <button data-nav="resources" onclick="showView('resources')">Recursos</button>
+    <button data-nav="roster" onclick="showView('roster')">Mi Equipo</button>
+    <button onclick="openTutorView()" style="color:var(--ink-soft);">Tutor</button>
+  </div>
+</nav>
+
+<!-- ===================== HOME ===================== -->
+<div id="view-home" class="view active">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Prep sessions · Cap. 1&ndash;6</div>
+      <h1>Get ready for Spanish&nbsp;2!</h1>
+      <p>General practice materials for everyone, plus a personal page for each of you: quizzes, a progress bar, and a checklist so you can keep training even when we're not in session together.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" onclick="showView('roster')">Enter My Page →</button>
+        <button class="btn btn-outline" onclick="showView('resources')">Browse Resources</button>
+      </div>
+      <div class="stat-row">
+        <div><div class="stat-num">6</div><div class="stat-label">Chapters</div></div>
+        <div><div class="stat-num">5</div><div class="stat-label">Student Athletes</div></div>
+        <div><div class="stat-num">18</div><div class="stat-label">Quiz Questions</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="eyebrow2">How this works</div>
+      <h2>Two ways to use this site</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <span class="tag">Everyone</span>
+        <h3>General Resources</h3>
+        <p>Grammar quick-references and worksheet links, organized by chapter. No login needed. Use these anytime.</p>
+        <span class="card-link" onclick="showView('resources')">View resources →</span>
+      </div>
+      <div class="card">
+        <span class="tag">Just for you</span>
+        <h3>Your Personal Page</h3>
+        <p>Find your name on the roster, enter your jersey number, and you'll get quizzes, a progress bar, and your own checklist.</p>
+        <span class="card-link" onclick="showView('roster')">Find your card →</span>
+      </div>
+      <div class="card">
+        <span class="tag">Goal</span>
+        <h3>Sentence-Level Spanish</h3>
+        <p>Every quiz and writing prompt pushes toward full sentences that combine conjugation + vocabulary, exactly what Spanish 2 assumes on day one.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== RESOURCES ===================== -->
+<div id="view-resources" class="view">
+  <div class="section" style="padding-top:48px;">
+    <div class="section-head">
+      <div class="eyebrow2">For everyone</div>
+      <h2>General Practice Materials</h2>
+      <p>Quick grammar references matched to your repaso worksheets, plus a place to drop your Quizlet vocab decks for each chapter pairing. Click a card to expand it.</p>
+    </div>
+
+    <div class="grid grid-2" id="ref-cards"></div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="section-head">
+      <div class="eyebrow2">Vocab practice</div>
+      <h2>Quizlet Decks</h2>
+      <p>Add your deck links here so students can jump straight to flashcards for each chapter pairing.</p>
+    </div>
+    <div class="grid grid-3" id="quizlet-cards"></div>
+  </div>
+</div>
+
+<!-- ===================== ROSTER ===================== -->
+<div id="view-roster" class="view">
+  <div class="roster-band">
+    <div class="roster-inner">
+      <div class="section-head">
+        <div class="eyebrow2">Team Access</div>
+        <h2>Find Your Card</h2>
+        <p>Tap your name, then enter your jersey number to open your personal page.</p>
+      </div>
+      <div class="grid grid-3" id="roster-cards"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== STUDENT DASHBOARD ===================== -->
+<div id="view-dash" class="view">
+  <div class="dash-header">
+    <div class="dash-header-inner">
+      <div class="dash-id">
+        <div class="dash-num" id="dash-num">00</div>
+        <div class="dash-name">
+          <h2 id="dash-name">Name</h2>
+          <div class="sub">Camino a Español 2 · Personal Page</div>
+        </div>
+      </div>
+      <button class="switch-user" onclick="showView('roster')">Switch Student ↩</button>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-card">
+      <div class="progress-top">
+        <span class="label">Overall Progress</span>
+        <span class="pct" id="progress-pct">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <div class="progress-chapters" id="progress-chips"></div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="quizzes" onclick="showTab('quizzes')">Quizzes</button>
+    <button class="tab-btn" data-tab="speaking" onclick="showTab('speaking')">Speaking Practice</button>
+    <button class="tab-btn" data-tab="checklist" onclick="showTab('checklist')">Checklist</button>
+    <button class="tab-btn" data-tab="myresources" onclick="showTab('myresources')">My Resources</button>
+  </div>
+
+  <div id="panel-quizzes" class="tab-panel active">
+    <div id="chapters-container"></div>
+  </div>
+
+  <div id="panel-speaking" class="tab-panel">
+    <p style="font-size:14px;color:var(--ink-soft);margin:0 0 24px;max-width:620px;line-height:1.6;">Fill in your own answer, then say the full sentence out loud. These are the kinds of things you should be able to say without thinking in Spanish 2.</p>
+    <div id="speaking-container"></div>
+  </div>
+
+  <div id="panel-checklist" class="tab-panel">
+    <div id="checklist-container"></div>
+  </div>
+
+  <div id="panel-myresources" class="tab-panel">
+    <div class="grid grid-2" id="my-resources-container"></div>
+  </div>
+</div>
+
+<!-- ===================== TUTOR DASHBOARD ===================== -->
+<div id="view-tutor" class="view">
+  <div class="section" style="padding-top:48px;">
+    <div class="section-head">
+      <div class="eyebrow2">Tutor view</div>
+      <h2>Practice Requests</h2>
+      <p>When a student taps "Notify my tutor" on a topic, it shows up here with their name and jersey number. Mark it done once you've followed up.</p>
+    </div>
+    <div id="tutor-requests"></div>
+  </div>
+</div>
+
+<footer>Built for Duke Athletics tutoring. Progress, quiz answers, and writing are saved automatically to this page, no login or account needed.</footer>
+
+<!-- ===================== PIN MODAL ===================== -->
+<div class="overlay" id="pin-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="pin-name">Player Name</h3>
+    <div class="modal-sub">Enter your 4-digit jersey number</div>
+    <input type="text" maxlength="4" class="pin-input" id="pin-input" placeholder="••••" inputmode="numeric">
+    <div class="pin-error" id="pin-error"></div>
+    <button class="btn btn-primary" style="width:100%" onclick="checkPin()">Unlock My Page</button>
+  </div>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const students = [
+  {name:"Jamien Little", jersey:"0101"},
+  {name:"Jaivon Solomon", jersey:"0404"},
+  {name:"Kimari Robinson", jersey:"0505"},
+  {name:"Terry Walker", jersey:"1313"},
+  {name:"KD Cotton", jersey:"2121"},
+];
+
+const refCards = [
+  {tag:"Cap. 1–2", title:"Ser + Present Tense Regulars", body:`
+    <table>
+      <tr><td>yo</td><td>soy · -o (hablo, como, vivo)</td></tr>
+      <tr><td>tú</td><td>eres · -as/-es (hablas, comes, vives)</td></tr>
+      <tr><td>él/ella/Ud.</td><td>es · -a/-e (habla, come, vive)</td></tr>
+      <tr><td>nosotros</td><td>somos · -amos/-emos/-imos</td></tr>
+      <tr><td>ellos/Uds.</td><td>son · -an/-en</td></tr>
+    </table>
+    <p style="margin-top:10px">Use <b>ser</b> for identity, origin, and characteristics: <i>Soy atleta. Somos de Duke.</i></p>`},
+  {tag:"Cap. 3–4", title:"Tener Expressions & Ir + a + Infinitivo", body:`
+    <table>
+      <tr><td>tener hambre/sed</td><td>to be hungry/thirsty</td></tr>
+      <tr><td>tener miedo</td><td>to be afraid</td></tr>
+      <tr><td>tener prisa</td><td>to be in a hurry</td></tr>
+      <tr><td>tener ___ años</td><td>to be ___ years old</td></tr>
+      <tr><td>ir + a + infinitivo</td><td>going to (do something): <i>Voy a estudiar.</i></td></tr>
+    </table>`},
+  {tag:"Cap. 3–4", title:"Irregular Yo-Form Verbs", body:`
+    <table>
+      <tr><td>hacer</td><td>hago</td></tr>
+      <tr><td>salir</td><td>salgo</td></tr>
+      <tr><td>poner</td><td>pongo</td></tr>
+      <tr><td>tener</td><td>tengo</td></tr>
+      <tr><td>venir</td><td>vengo</td></tr>
+    </table>
+    <p style="margin-top:10px">Only the <b>yo</b> form is irregular; every other form conjugates normally.</p>`},
+  {tag:"Cap. 5–6", title:"Ser vs. Estar", body:`
+    <p><b>Ser</b>: identity, origin, characteristics, time: <i>Es alto. Son las tres.</i></p>
+    <p style="margin-top:8px"><b>Estar</b>: location, condition, feelings, progressive: <i>Está en el gimnasio. Estoy cansado.</i></p>`},
+  {tag:"Cap. 5–6", title:"Verbs Like Gustar", body:`
+    <p>The verb agrees with what's liked, not the person who likes it:</p>
+    <table>
+      <tr><td>me/te/le gusta</td><td>+ singular noun or infinitive</td></tr>
+      <tr><td>me/te/le gustan</td><td>+ plural noun</td></tr>
+      <tr><td>nos/os/les gusta(n)</td><td>same pattern, plural subject</td></tr>
+    </table>
+    <p style="margin-top:10px">Same family: <i>encantar, interesar, molestar, importar</i>.</p>`},
+  {tag:"Cap. 5–6", title:"Por vs. Para & De vs. Desde", body:`
+    <p><b>Por</b>: duration, exchange, "through/by": <i>Estudio por dos horas.</i></p>
+    <p style="margin-top:6px"><b>Para</b>: recipient, purpose, deadline: <i>Es para mi entrenador.</i></p>
+    <p style="margin-top:10px"><b>De</b>: origin, possession: <i>Soy de Carolina del Norte.</i></p>
+    <p style="margin-top:6px"><b>Desde</b>: starting point in time/space: <i>Desde las ocho.</i></p>`},
+];
+
+const quizletDecks = [
+  {tag:"Cap. 1–2", title:"Saludos, clases & verbos regulares", url:"#"},
+  {tag:"Cap. 3–4", title:"Familia, tener & ir + a", url:"#"},
+  {tag:"Cap. 5–6", title:"Ser/estar, gustar & preposiciones", url:"#"},
+];
+
+const chapters = [
+  {
+    id:"c12", label:"Capítulo 1–2", title:"Ser + Present Tense Regulars",
+    topics:[
+      {
+        id:"ser", label:"Ser Practice",
+        questions:[
+          {type:"mc", text:"Yo ___ estudiante-atleta de Duke.", options:["soy","eres","es","somos"], answer:0, translation:"I am a student-athlete at Duke."},
+          {type:"fill", text:"Ella ___ (ser) de Carolina del Norte.", answers:["es"], translation:"She is from North Carolina."},
+          {type:"mc", text:"Nosotros ___ (ser) un buen equipo.", options:["soy","son","somos","eres"], answer:2, translation:"We are a good team."},
+          {type:"fill", text:"Tú ___ (ser) muy trabajador.", answers:["eres"], translation:"You are very hardworking."},
+          {type:"mc", text:"Mis compañeros ___ (ser) de varios estados.", options:["soy","es","son","eres"], answer:2, translation:"My teammates are from several states."},
+          {type:"fill", text:"Yo ___ (ser) el capitán del equipo.", answers:["soy"], translation:"I am the team captain."},
+        ]
+      },
+      {
+        id:"present", label:"Present Tense Regulars Practice",
+        questions:[
+          {type:"fill", text:"Yo ___ (estudiar) español todos los días.", answers:["estudio"], translation:"I study Spanish every day."},
+          {type:"mc", text:"Tú ___ (hablar) con el profesor después de clase.", options:["hablo","hablas","habla","hablamos"], answer:1, translation:"You talk with the professor after class."},
+          {type:"fill", text:"Nosotros ___ (leer) el libro de texto antes del examen.", answers:["leemos"], translation:"We read the textbook before the exam."},
+          {type:"fill", text:"Ellos ___ (escribir) mensajes en español.", answers:["escriben"], translation:"They write messages in Spanish."},
+          {type:"mc", text:"\"Practico deporte\" means...", options:["I watch a sport","I practice a sport","I play music","I study a sport"], answer:1, translation:"Practico deporte = I practice a sport."},
+          {type:"fill", text:"Mi compañero ___ (correr) cinco millas cada mañana.", answers:["corre"], translation:"My teammate runs five miles every morning."},
+          {type:"mc", text:"Nosotros ___ (comer) juntos después del entrenamiento.", options:["come","comemos","comen","comes"], answer:1, translation:"We eat together after practice."},
+          {type:"fill", text:"Yo ___ (vivir) cerca del campus.", answers:["vivo"], translation:"I live near campus."},
+        ]
+      }
+    ],
+    writing:[
+      {prompt:"Write a sentence describing who you are, using ser.", example:"Soy jugador de fútbol americano y estudiante de Duke.", exampleTranslation:"I am a football player and a Duke student."},
+      {prompt:"Write a sentence about something you do in class, using an -ar verb.", example:"Escucho música antes del partido.", exampleTranslation:"I listen to music before the game."},
+      {prompt:"Write a sentence about something you and a teammate do, using nosotros + an -er or -ir verb.", example:"Nosotros escribimos la tarea juntos después del entrenamiento.", exampleTranslation:"We write the homework together after practice."},
+    ],
+    challenge:{
+      prompt:"Write a short paragraph (3–4 sentences) introducing yourself to a new Spanish 2 classmate. Include your name, where you're from, one class or activity you study, and something you do every day.",
+      example:"Me llamo Jamien Little. Soy de Carolina del Norte. Estudio ingeniería y hablo con mis profesores después de clase. Practico deporte con mi equipo todos los días.",
+      exampleTranslation:"My name is Jamien Little. I am from North Carolina. I study engineering and I talk with my professors after class. I practice sports with my team every day."
+    }
+  },
+  {
+    id:"c34", label:"Capítulo 3–4", title:"Tener, Ir + a + Infinitivo & Yo Irregulares",
+    topics:[
+      {
+        id:"tener", label:"Tener Expressions Practice",
+        questions:[
+          {type:"fill", text:"Yo ___ (tener) veinte años.", answers:["tengo"], translation:"I am twenty years old."},
+          {type:"fill", text:"Nosotros ___ (tener) hambre después del entrenamiento.", answers:["tenemos"], translation:"We are hungry after practice."},
+          {type:"mc", text:"How do you say \"I'm afraid\" in Spanish?", options:["Soy miedo","Tengo miedo","Estoy miedo","Hago miedo"], answer:1, translation:"Tengo miedo = I'm afraid."},
+          {type:"mc", text:"How do you say \"to be in a hurry\"?", options:["tener prisa","tener razón","tener suerte","tener frío"], answer:0, translation:"tener prisa = to be in a hurry."},
+          {type:"fill", text:"Mi hermano ___ (tener) sed después de correr.", answers:["tiene"], translation:"My brother is thirsty after running."},
+          {type:"mc", text:"\"Tenemos mucha suerte\" means...", options:["We have a lot of work","We are very lucky","We are very tired","We have a lot of time"], answer:1, translation:"Tenemos mucha suerte = We are very lucky."},
+        ]
+      },
+      {
+        id:"ir_a", label:"Ir + a + Infinitivo Practice",
+        questions:[
+          {type:"fill", text:"Mañana yo ___ (ir) a estudiar para el examen.", answers:["voy"], translation:"Tomorrow I am going to study for the exam."},
+          {type:"mc", text:"\"Van a practicar fútbol\" means...", options:["They practiced soccer","They practice soccer","They are going to practice soccer","They want to practice soccer"], answer:2, translation:"Van a practicar fútbol = They are going to practice soccer."},
+          {type:"fill", text:"Nosotros ___ (ir) a cenar juntos esta noche.", answers:["vamos"], translation:"We are going to have dinner together tonight."},
+          {type:"mc", text:"Tú ___ (ir) a llegar tarde si no sales ahora.", options:["va","voy","vas","van"], answer:2, translation:"You are going to be late if you don't leave now."},
+          {type:"fill", text:"Ella ___ (ir) a descansar después del partido.", answers:["va"], translation:"She is going to rest after the game."},
+          {type:"mc", text:"Which is correct for \"I am going to travel this weekend\"?", options:["Voy a viajar este fin de semana","Voy viajar este fin de semana","Yo viajar a este fin de semana","Voy a viaje este fin de semana"], answer:0, translation:"I am going to travel this weekend."},
+        ]
+      },
+      {
+        id:"yo_irregular", label:"Irregular Yo-Verbs Practice",
+        questions:[
+          {type:"fill", text:"Yo ___ (hacer) la tarea por la noche.", answers:["hago"], translation:"I do homework at night."},
+          {type:"fill", text:"Yo ___ (salir) del gimnasio a las seis.", answers:["salgo"], translation:"I leave the gym at six."},
+          {type:"mc", text:"Yo ___ (poner) mis libros en la mochila.", options:["pono","pongo","ponto","pon"], answer:1, translation:"I put my books in the backpack."},
+          {type:"fill", text:"Yo ___ (venir) a clase temprano.", answers:["vengo"], translation:"I come to class early."},
+          {type:"mc", text:"Yo ___ (tener) mucho trabajo esta semana.", options:["tiengo","tengo","teno","tenio"], answer:1, translation:"I have a lot of work this week."},
+          {type:"fill", text:"Yo ___ (traer) mi computadora a la biblioteca.", answers:["traigo"], translation:"I bring my computer to the library."},
+        ]
+      }
+    ],
+    writing:[
+      {prompt:"Write a sentence about your age or a family member's age, using tener.", example:"Mi hermano tiene dieciocho años.", exampleTranslation:"My brother is eighteen years old."},
+      {prompt:"Write a sentence about a plan for tomorrow, using ir + a + infinitivo.", example:"Este fin de semana voy a descansar y ver películas.", exampleTranslation:"This weekend I am going to rest and watch movies."},
+      {prompt:"Write a sentence describing a family member with an adjective that agrees correctly.", example:"Mi madre es muy trabajadora y paciente.", exampleTranslation:"My mother is very hardworking and patient."},
+    ],
+    challenge:{
+      prompt:"Write a short paragraph about your family and your plans for this weekend. Include an age using tener, a description using an adjective, and a plan using ir + a + infinitivo.",
+      example:"Mi hermana tiene diecinueve años y es muy inteligente. Este fin de semana, mi familia y yo vamos a cenar juntos. Tengo mucha hambre después del entrenamiento, ¡así que voy a comer bien!",
+      exampleTranslation:"My sister is nineteen years old and is very intelligent. This weekend, my family and I are going to have dinner together. I am very hungry after practice, so I am going to eat well!"
+    }
+  },
+  {
+    id:"c56", label:"Capítulo 5–6", title:"Ser vs. Estar, Gustar & Preposiciones",
+    topics:[
+      {
+        id:"serestar", label:"Ser vs. Estar Practice",
+        questions:[
+          {type:"mc", text:"Duke ___ en Carolina del Norte. (location)", options:["es","son","está","soy"], answer:2, translation:"Duke is in North Carolina."},
+          {type:"mc", text:"Mi entrenadora ___ muy inteligente. (characteristic)", options:["está","es","están","estoy"], answer:1, translation:"My coach is very intelligent."},
+          {type:"fill", text:"Nosotros ___ (estar) cansados después del partido.", answers:["estamos"], translation:"We are tired after the game."},
+          {type:"mc", text:"Hoy ___ un día importante. (event)", options:["está","es","están","son"], answer:1, translation:"Today is an important day."},
+          {type:"fill", text:"El gimnasio ___ (estar) cerca del estadio.", answers:["está"], translation:"The gym is near the stadium."},
+          {type:"mc", text:"Mis padres ___ orgullosos de mí. (feeling)", options:["son","es","están","está"], answer:2, translation:"My parents are proud of me."},
+          {type:"fill", text:"La profesora ___ (estar) en su oficina ahora.", answers:["está"], translation:"The professor is in her office now."},
+          {type:"mc", text:"¿Cómo ___ tú hoy? (feeling)", options:["eres","estás","es","está"], answer:1, translation:"How do you feel today?"},
+        ]
+      },
+      {
+        id:"gustar", label:"Gustar Practice",
+        questions:[
+          {type:"mc", text:"A mí ___ los deportes.", options:["me gusta","me gustan","le gusta","le gustan"], answer:1, translation:"I like sports."},
+          {type:"fill", text:"A Jaivon le ___ (gustar) el fútbol americano.", answers:["gusta"], translation:"Jaivon likes football."},
+          {type:"mc", text:"A nosotros ___ las clases de español.", options:["nos gusta","nos gustan","les gustan","nos gustas"], answer:1, translation:"We like Spanish classes."},
+          {type:"fill", text:"A ti te ___ (gustar) estudiar por la noche.", answers:["gusta"], translation:"You like studying at night."},
+          {type:"mc", text:"\"A ellos ___ mucho viajar.\"", options:["les gusta","le gusta","les gustan","les gustas"], answer:0, translation:"They really like to travel."},
+          {type:"fill", text:"A mi compañero de equipo le ___ (encantar) la música.", answers:["encanta"], translation:"My teammate loves music."},
+        ]
+      },
+      {
+        id:"prepositions", label:"Prepositions Practice (Por / Para / De / Desde)",
+        questions:[
+          {type:"mc", text:"Estudio ___ dos horas cada noche. (duration)", options:["por","para","de","desde"], answer:0, translation:"I study for two hours every night."},
+          {type:"mc", text:"Este regalo es ___ mi entrenador. (recipient)", options:["por","para","desde","de"], answer:1, translation:"This gift is for my coach."},
+          {type:"fill", text:"Soy ___ (de/desde) Carolina del Norte.", answers:["de"], translation:"I am from North Carolina."},
+          {type:"mc", text:"Trabajamos ___ mejorar nuestro español. (purpose)", options:["por","desde","para","de"], answer:2, translation:"We work in order to improve our Spanish."},
+          {type:"fill", text:"Caminamos ___ (por) el campus todos los días.", answers:["por"], translation:"We walk through campus every day."},
+          {type:"mc", text:"Estudio español ___ el año 2023. (starting point in time)", options:["por","para","de","desde"], answer:3, translation:"I have studied Spanish since 2023."},
+        ]
+      }
+    ],
+    writing:[
+      {prompt:"Write a sentence using estar to describe how you feel today.", example:"Estoy emocionado por el próximo partido.", exampleTranslation:"I am excited about the next game."},
+      {prompt:"Write a sentence using a gustar-type verb about something you like.", example:"Me encantan los fines de semana sin práctica.", exampleTranslation:"I love weekends without practice."},
+      {prompt:"Write a sentence using por or para correctly.", example:"Corro por el campus todas las mañanas.", exampleTranslation:"I run through campus every morning."},
+    ],
+    challenge:{
+      prompt:"Write a short paragraph describing how you feel today, something you like, and where you are right now. Use estar, a gustar-type verb, and a preposition (por/para/de).",
+      example:"Hoy estoy cansado pero contento. Me gusta mucho jugar al fútbol americano por la tarde. Estoy en el gimnasio de Duke, y soy de Carolina del Norte.",
+      exampleTranslation:"Today I am tired but happy. I really like playing football in the afternoon. I am in the Duke gym, and I am from North Carolina."
+    }
+  },
+];
+
+const speakingPractice = [
+  {category:"About you", items:[
+    {template:"Me llamo ____.", translation:"My name is ____.", instruction:"Say your full name."},
+    {template:"Soy de ____.", translation:"I am from ____.", instruction:"Say your hometown or state."},
+    {template:"Tengo ____ años.", translation:"I am ____ years old.", instruction:"Say your age."},
+  ]},
+  {category:"Preferences", items:[
+    {template:"Mi color favorito es ____.", translation:"My favorite color is ____.", instruction:"Say your favorite color."},
+    {template:"Mi comida favorita es ____.", translation:"My favorite food is ____.", instruction:"Say your favorite food."},
+    {template:"Me gusta ____.", translation:"I like ____.", instruction:"Say something you like doing."},
+  ]},
+  {category:"Team and daily life", items:[
+    {template:"Juego ____ en Duke.", translation:"I play ____ at Duke.", instruction:"Say your sport."},
+    {template:"Hoy estoy ____.", translation:"Today I feel ____.", instruction:"Say how you feel today."},
+    {template:"Después del entrenamiento, ____.", translation:"After practice, I ____.", instruction:"Say what you do after practice."},
+  ]},
+];
+
+const defaultChecklist = [
+  "Meet with tutor to review Cap. 1–2",
+  "Review the Ser vs. Estar quick-reference",
+  "Study Cap. 3–4 vocab on Quizlet",
+  "Complete the Cap. 5–6 repaso worksheet",
+  "Practice writing 5 sentences using gustar",
+];
+
+/* Change this to whatever you want your tutor-dashboard passcode to be. */
+const TUTOR_PASSCODE = "coach2026";
+
+/* ============ STORAGE HELPERS ============ */
+async function loadStudentData(jersey){
+  try{
+    const res = await window.storage.get('student:'+jersey, true);
+    if(res && res.value) return JSON.parse(res.value);
+  }catch(e){}
+  return {quizzes:{}, writing:{}, checklist:{}};
+}
+async function saveStudentData(jersey, data){
+  try{
+    await window.storage.set('student:'+jersey, JSON.stringify(data), true);
+  }catch(e){ console.error('Storage error', e); }
+}
+
+let currentStudent = null;
+let currentData = {quizzes:{}, writing:{}, checklist:{}};
+let pendingJersey = null;
+
+/* ============ NAV ============ */
+function showView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  const nb = document.querySelector('.nav-links button[data-nav="'+name+'"]');
+  if(nb) nb.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goHome(){ showView('home'); }
+
+function showTab(name){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.tab-btn[data-tab="'+name+'"]').classList.add('active');
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+}
+
+/* ============ RENDER: RESOURCES ============ */
+function renderResources(){
+  const wrap = document.getElementById('ref-cards');
+  wrap.innerHTML = refCards.map((r,i)=>`
+    <div class="card ref-card" onclick="this.classList.toggle('open')">
+      <span class="tag">${r.tag}</span>
+      <h3>${r.title}</h3>
+      <span class="ref-toggle">Tap to expand ▾</span>
+      <div class="ref-body">${r.body}</div>
+    </div>
+  `).join('');
+
+  const qwrap = document.getElementById('quizlet-cards');
+  qwrap.innerHTML = quizletDecks.map(d=>`
+    <div class="card">
+      <span class="tag">${d.tag}</span>
+      <h3>${d.title}</h3>
+      <p>Flashcard deck for this chapter pairing.</p>
+      <a class="card-link" href="${d.url}" target="_blank" rel="noopener">Open deck →</a>
+    </div>
+  `).join('');
+}
+
+/* ============ RENDER: ROSTER ============ */
+function renderRoster(){
+  const wrap = document.getElementById('roster-cards');
+  wrap.innerHTML = students.map(s=>{
+    const initials = s.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    return `
+    <div class="jersey-card" onclick="openPinModal('${s.jersey}','${s.name}')">
+      <div class="jersey-avatar">${initials}</div>
+      <div class="jersey-name">${s.name}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ============ PIN MODAL ============ */
+function openPinModal(jersey, name){
+  pendingJersey = jersey;
+  document.getElementById('pin-name').textContent = name;
+  document.getElementById('pin-input').value = '';
+  document.getElementById('pin-error').textContent = '';
+  document.getElementById('pin-overlay').classList.add('active');
+  setTimeout(()=>document.getElementById('pin-input').focus(),100);
+}
+function closeModal(){
+  document.getElementById('pin-overlay').classList.remove('active');
+}
+document.getElementById('pin-input').addEventListener('keydown', e=>{
+  if(e.key === 'Enter') checkPin();
+});
+async function checkPin(){
+  const val = document.getElementById('pin-input').value.trim();
+  const student = students.find(s=>s.jersey === pendingJersey);
+  if(val === student.jersey){
+    closeModal();
+    await openDashboard(student);
+  }else{
+    document.getElementById('pin-error').textContent = "That doesn't match. Try your jersey number again.";
+  }
+}
+
+/* ============ DASHBOARD ============ */
+async function openDashboard(student){
+  currentStudent = student;
+  currentData = await loadStudentData(student.jersey);
+  if(!currentData.quizzes) currentData.quizzes = {};
+  if(!currentData.writing) currentData.writing = {};
+  if(!currentData.checklist) currentData.checklist = {};
+  if(!currentData.challenges) currentData.challenges = {};
+  if(!currentData.speaking) currentData.speaking = {};
+
+  document.getElementById('dash-num').textContent = '#'+student.jersey.slice(0,2);
+  document.getElementById('dash-name').textContent = student.name;
+
+  renderChapters();
+  renderSpeaking();
+  renderChecklist();
+  renderMyResources();
+  updateProgress();
+  showTab('quizzes');
+  showView('dash');
+}
+
+function updateProgress(){
+  let totalTopics = 0, doneTopics = 0;
+  const chipsWrap = document.getElementById('progress-chips');
+  chipsWrap.innerHTML = '';
+  chapters.forEach(ch=>{
+    let chapDone = 0;
+    ch.topics.forEach(topic=>{
+      totalTopics++;
+      const key = ch.id+'__'+topic.id;
+      const q = currentData.quizzes[key];
+      if(q && q.completed){ doneTopics++; chapDone++; }
+    });
+    const chip = document.createElement('span');
+    const chapComplete = chapDone === ch.topics.length;
+    chip.className = 'chip' + (chapComplete ? ' done' : '');
+    chip.textContent = ch.label + ' (' + chapDone + '/' + ch.topics.length + ')' + (chapComplete ? ' ✓' : '');
+    chipsWrap.appendChild(chip);
+
+    const statusEl = document.getElementById('status-'+ch.id);
+    if(statusEl){
+      statusEl.textContent = chapDone + ' of ' + ch.topics.length + ' sections complete';
+      statusEl.classList.toggle('done', chapComplete);
+    }
+  });
+  const pct = totalTopics ? Math.round((doneTopics/totalTopics)*100) : 0;
+  document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+/* ---- Chapters / Quizzes ---- */
+function renderChapters(){
+  const wrap = document.getElementById('chapters-container');
+  wrap.innerHTML = chapters.map(ch=>{
+    return `
+    <div class="chapter" id="chapter-${ch.id}">
+      <div class="chapter-head" onclick="toggleChapter('${ch.id}')">
+        <div>
+          <h3>${ch.label}: ${ch.title}</h3>
+          <div class="meta">${ch.topics.length} practice sets + writing + speaking</div>
+        </div>
+        <span class="chapter-status" id="status-${ch.id}">Not started</span>
+      </div>
+      <div class="chapter-body">
+        ${ch.topics.map(topic=>{
+          const topicKey = ch.id+'__'+topic.id;
+          return `
+          <div class="topic-block">
+            <div class="topic-head">
+              <h4 class="topic-title">${topic.label}</h4>
+              <span class="chapter-status" id="status-${topicKey}">Not started</span>
+            </div>
+            <div id="qz-${topicKey}"></div>
+            <div class="quiz-actions">
+              <button class="btn btn-primary" style="padding:10px 20px;" onclick="gradeQuiz('${topicKey}')">Check My Answers</button>
+              <span class="quiz-score" id="score-${topicKey}"></span>
+            </div>
+            <div id="gen-${topicKey}"></div>
+            <div class="more-practice-row">
+              <span class="more-practice-label">Need more practice on ${topic.label.replace(' Practice','')}?</span>
+              <button class="btn-chip" onclick="generateMorePractice('${ch.id}','${topic.id}','${topic.label}', this)">Generate 5 more questions</button>
+              <button class="btn-chip" onclick="flagForTutor('${ch.id}','${topic.id}','${topic.label}', this)">Notify my tutor</button>
+            </div>
+          </div>`;
+        }).join('')}
+
+        <h4 style="font-size:14px;font-weight:600;color:var(--navy);margin:30px 0 4px;">Writing practice</h4>
+        <div id="write-${ch.id}"></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  chapters.forEach(ch=>{
+    ch.topics.forEach(topic=>{
+      const topicKey = ch.id+'__'+topic.id;
+      document.getElementById('qz-'+topicKey).innerHTML = topic.questions.map((q,i)=>renderQuestion(topicKey,q,i)).join('');
+      restoreQuizState(topicKey);
+    });
+    document.getElementById('write-'+ch.id).innerHTML =
+      ch.writing.map((w,i)=>renderWritePrompt(ch.id,w,i)).join('') +
+      renderChallenge(ch.id, ch.challenge);
+  });
+}
+
+function toggleChapter(id){
+  document.getElementById('chapter-'+id).classList.toggle('open');
+}
+
+function toggleTranslation(btn){
+  const el = btn.nextElementSibling;
+  el.classList.toggle('show');
+  btn.textContent = el.classList.contains('show') ? 'Hide translation' : 'Show translation';
+}
+
+function renderQuestion(chapId, q, idx){
+  const translationHtml = `<button class="translate-toggle" onclick="toggleTranslation(this)">Show translation</button><div class="translate-text">${q.translation}</div>`;
+  if(q.type === 'mc'){
+    return `
+      <div class="quiz-q" data-chap="${chapId}" data-idx="${idx}" data-type="mc" data-answer="${q.answer}">
+        <div class="qtext">${idx+1}. ${q.text}</div>
+        <div class="opt-row">
+          ${q.options.map((o,oi)=>`<div class="opt" data-oi="${oi}" onclick="selectOpt('${chapId}',${idx},${oi})">${o}</div>`).join('')}
+        </div>
+        <div class="q-feedback" id="fb-${chapId}-${idx}"></div>
+        ${translationHtml}
+      </div>`;
+  }else{
+    return `
+      <div class="quiz-q" data-chap="${chapId}" data-idx="${idx}" data-type="fill" data-answers='${JSON.stringify(q.answers)}'>
+        <div class="qtext">${idx+1}. ${q.text}</div>
+        <input type="text" class="fill-input" id="fill-${chapId}-${idx}" placeholder="tu respuesta...">
+        <div class="q-feedback" id="fb-${chapId}-${idx}"></div>
+        ${translationHtml}
+      </div>`;
+  }
+}
+function selectOpt(chapId, idx, oi){
+  const row = document.querySelector('.quiz-q[data-chap="'+chapId+'"][data-idx="'+idx+'"] .opt-row');
+  row.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected','correct','incorrect'));
+  row.querySelector('.opt[data-oi="'+oi+'"]').classList.add('selected');
+}
+
+function gradeQuiz(chapId){
+  const qEls = document.querySelectorAll('#qz-'+chapId+' .quiz-q');
+  let score = 0;
+  const responses = [];
+  qEls.forEach(el=>{
+    const type = el.dataset.type;
+    const idx = el.dataset.idx;
+    const fb = document.getElementById('fb-'+chapId+'-'+idx);
+    if(type === 'mc'){
+      const correctIdx = parseInt(el.dataset.answer);
+      const selected = el.querySelector('.opt.selected');
+      el.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','incorrect'));
+      if(selected){
+        const selIdx = parseInt(selected.dataset.oi);
+        const isCorrect = selIdx === correctIdx;
+        if(isCorrect){
+          selected.classList.add('correct'); score++;
+          fb.textContent = 'Correcto.'; fb.className = 'q-feedback correct';
+        }else{
+          selected.classList.add('incorrect');
+          el.querySelector('.opt[data-oi="'+correctIdx+'"]').classList.add('correct');
+          fb.textContent = 'Not quite. Correct answer highlighted.'; fb.className = 'q-feedback incorrect';
+        }
+        responses.push({type:'mc', selected:selIdx, correct:isCorrect});
+      }else{
+        fb.textContent = 'No answer selected.'; fb.className = 'q-feedback incorrect';
+        responses.push({type:'mc', selected:null, correct:false});
+      }
+    }else{
+      const answers = JSON.parse(el.dataset.answers).map(a=>a.toLowerCase().trim());
+      const input = document.getElementById('fill-'+chapId+'-'+idx);
+      const val = input.value.toLowerCase().trim();
+      input.classList.remove('correct','incorrect');
+      const isCorrect = answers.includes(val);
+      if(isCorrect){
+        input.classList.add('correct'); score++;
+        fb.textContent = 'Correcto.'; fb.className = 'q-feedback correct';
+      }else{
+        input.classList.add('incorrect');
+        fb.textContent = 'Correct answer: ' + answers[0]; fb.className = 'q-feedback incorrect';
+      }
+      responses.push({type:'fill', value:input.value, correct:isCorrect});
+    }
+  });
+  const total = qEls.length;
+  document.getElementById('score-'+chapId).textContent = score + ' / ' + total + ' correct (latest attempt)';
+
+  const prevBest = currentData.quizzes[chapId] ? currentData.quizzes[chapId].score : -1;
+  currentData.quizzes[chapId] = {
+    score: Math.max(score, prevBest),
+    total: total,
+    completed: true,
+    lastScore: score,
+    responses: responses
+  };
+  saveStudentData(currentStudent.jersey, currentData);
+  document.getElementById('status-'+chapId).textContent = 'Best: ' + currentData.quizzes[chapId].score + '/' + total;
+  document.getElementById('status-'+chapId).classList.add('done');
+  updateProgress();
+}
+
+function restoreQuizState(chapId){
+  const saved = currentData.quizzes[chapId];
+  if(!saved || !saved.responses) return;
+  const qEls = document.querySelectorAll('#qz-'+chapId+' .quiz-q');
+  qEls.forEach(el=>{
+    const idx = el.dataset.idx;
+    const r = saved.responses[idx];
+    if(!r) return;
+    const fb = document.getElementById('fb-'+chapId+'-'+idx);
+    if(r.type === 'mc' && r.selected !== null){
+      const correctIdx = parseInt(el.dataset.answer);
+      const opt = el.querySelector('.opt[data-oi="'+r.selected+'"]');
+      if(opt) opt.classList.add('selected', r.correct ? 'correct' : 'incorrect');
+      if(!r.correct){
+        const correctOpt = el.querySelector('.opt[data-oi="'+correctIdx+'"]');
+        if(correctOpt) correctOpt.classList.add('correct');
+      }
+      fb.textContent = r.correct ? 'Correcto (saved from last visit).' : 'Missed last time. Correct answer highlighted.';
+      fb.className = 'q-feedback ' + (r.correct ? 'correct' : 'incorrect');
+    }else if(r.type === 'fill'){
+      const input = document.getElementById('fill-'+chapId+'-'+idx);
+      if(input){
+        input.value = r.value;
+        input.classList.add(r.correct ? 'correct' : 'incorrect');
+      }
+      fb.textContent = r.correct ? 'Correcto (saved from last visit).' : 'Missed last time. Correct answer shown above.';
+      fb.className = 'q-feedback ' + (r.correct ? 'correct' : 'incorrect');
+    }
+  });
+  document.getElementById('score-'+chapId).textContent = saved.lastScore + ' / ' + saved.total + ' correct (last attempt) · best ' + saved.score + '/' + saved.total;
+}
+
+function renderWritePrompt(chapId, w, idx){
+  const savedText = (currentData.writing[chapId] && currentData.writing[chapId][idx]) || '';
+  return `
+    <div class="write-prompt">
+      <p><b>${idx+1}.</b> ${w.prompt}</p>
+      <textarea class="write-textarea" id="write-${chapId}-${idx}" placeholder="Escribe tu oración aquí...">${savedText}</textarea>
+      <div class="write-saved" id="saved-${chapId}-${idx}">Saved</div>
+      <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show example</button>
+      <div class="reveal-answer">${w.example}<br><span style="color:var(--ink-soft)">${w.exampleTranslation}</span></div>
+    </div>`;
+}
+function saveWriting(chapId, idx, value){
+  if(!currentData.writing[chapId]) currentData.writing[chapId] = [];
+  currentData.writing[chapId][idx] = value;
+  saveStudentData(currentStudent.jersey, currentData);
+  const badge = document.getElementById('saved-'+chapId+'-'+idx);
+  if(badge){
+    badge.classList.add('show');
+    clearTimeout(badge._t);
+    badge._t = setTimeout(()=>badge.classList.remove('show'), 1500);
+  }
+}
+
+function renderChallenge(chapId, challenge){
+  const savedText = (currentData.challenges && currentData.challenges[chapId]) || '';
+  return `
+    <div class="challenge-box">
+      <div class="challenge-label">Paragraph challenge</div>
+      <p class="prompt">${challenge.prompt}</p>
+      <textarea class="write-textarea" style="min-height:110px" id="challenge-${chapId}" placeholder="Escribe tu párrafo aquí...">${savedText}</textarea>
+      <div class="write-saved" id="saved-challenge-${chapId}">Saved</div>
+      <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show example paragraph</button>
+      <div class="reveal-answer">${challenge.example}<br><span style="color:var(--ink-soft)">${challenge.exampleTranslation}</span></div>
+    </div>`;
+}
+function saveChallenge(chapId, value){
+  if(!currentData.challenges) currentData.challenges = {};
+  currentData.challenges[chapId] = value;
+  saveStudentData(currentStudent.jersey, currentData);
+  const badge = document.getElementById('saved-challenge-'+chapId);
+  if(badge){
+    badge.classList.add('show');
+    clearTimeout(badge._t);
+    badge._t = setTimeout(()=>badge.classList.remove('show'), 1500);
+  }
+}
+
+document.addEventListener('input', function(e){
+  if(e.target.matches('.write-textarea')){
+    const id = e.target.id;
+    if(id.startsWith('write-')){
+      const parts = id.split('-');
+      const chapId = parts[1], idx = parts[2];
+      clearTimeout(e.target._t);
+      e.target._t = setTimeout(()=>saveWriting(chapId, idx, e.target.value), 500);
+    }else if(id.startsWith('challenge-')){
+      const chapId = id.replace('challenge-','');
+      clearTimeout(e.target._t);
+      e.target._t = setTimeout(()=>saveChallenge(chapId, e.target.value), 500);
+    }
+  }
+});
+
+/* ---- Generate more practice (calls Claude) ---- */
+async function generateMorePractice(chapId, topicId, topicLabel, btn){
+  const topicKey = chapId+'__'+topicId;
+  const genKey = topicKey+'__gen';
+  const originalText = btn.textContent;
+  btn.textContent = 'Generating...';
+  btn.disabled = true;
+  try{
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        messages: [{
+          role: "user",
+          content: `Generate 5 new Spanish practice questions on the topic "${topicLabel}" for a Duke Athletics tutoring student transitioning from Spanish 1 to Spanish 2. Return ONLY a raw JSON array, no markdown fences, no preamble, matching exactly this schema:
+[{"type":"mc","text":"Spanish sentence with a ___ blank, or a short conceptual question in English","options":["opt1","opt2","opt3","opt4"],"answer":0,"translation":"English translation of the Spanish sentence"},{"type":"fill","text":"Spanish sentence with a ___ blank","answers":["correctword"],"translation":"English translation"}]
+Mix mc and fill types (roughly half and half). Where natural, set sentences around college athletics, teammates, classes, or campus life. Keep grammar strictly limited to the topic "${topicLabel}". Keep vocabulary at a late Spanish 1 / early Spanish 2 level.`
+        }]
+      })
+    });
+    const data = await response.json();
+    const textBlock = (data.content || []).find(b => b.type === 'text');
+    if(!textBlock) throw new Error('No text in response');
+    let raw = textBlock.text.trim();
+    raw = raw.replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();
+    const newQuestions = JSON.parse(raw);
+    if(!Array.isArray(newQuestions) || newQuestions.length === 0) throw new Error('Empty question list');
+
+    const genContainer = document.getElementById('gen-'+topicKey);
+    genContainer.innerHTML = `
+      <h5 style="font-size:12.5px;font-weight:600;color:var(--navy);margin:18px 0 4px;">More practice, generated for you</h5>
+      <div id="qz-${genKey}"></div>
+      <div class="quiz-actions">
+        <button class="btn btn-primary" style="padding:10px 20px;" onclick="gradeQuiz('${genKey}')">Check My Answers</button>
+        <span class="quiz-score" id="score-${genKey}"></span>
+      </div>`;
+    document.getElementById('qz-'+genKey).innerHTML = newQuestions.map((q,i)=>renderQuestion(genKey,q,i)).join('');
+    btn.style.display = 'none';
+  }catch(err){
+    console.error('Generate practice error', err);
+    btn.textContent = 'Could not generate, try again';
+    btn.disabled = false;
+    setTimeout(()=>{ btn.textContent = originalText; }, 2500);
+  }
+}
+
+/* ---- Flag for tutor / Tutor dashboard ---- */
+async function getRequests(){
+  try{
+    const res = await window.storage.get('practice_requests', true);
+    if(res && res.value) return JSON.parse(res.value);
+  }catch(e){}
+  return [];
+}
+async function saveRequests(list){
+  try{ await window.storage.set('practice_requests', JSON.stringify(list), true); }
+  catch(e){ console.error('Storage error', e); }
+}
+async function flagForTutor(chapId, topicId, topicLabel, btn){
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  const list = await getRequests();
+  const ch = chapters.find(c=>c.id===chapId);
+  list.push({
+    student: currentStudent.name,
+    jersey: currentStudent.jersey,
+    chapter: ch.label,
+    topic: topicLabel,
+    time: new Date().toISOString()
+  });
+  await saveRequests(list);
+  btn.textContent = 'Sent to your tutor ✓';
+}
+
+function openTutorView(){
+  const pass = window.prompt('Enter tutor passcode:');
+  if(pass === null) return;
+  if(pass === TUTOR_PASSCODE){
+    showView('tutor');
+    loadTutorRequests();
+  }else{
+    alert('Incorrect passcode.');
+  }
+}
+async function loadTutorRequests(){
+  const wrap = document.getElementById('tutor-requests');
+  wrap.innerHTML = '<p style="color:var(--ink-soft);font-size:14px;">Loading...</p>';
+  const list = await getRequests();
+  if(list.length === 0){
+    wrap.innerHTML = '<p style="color:var(--ink-soft);font-size:14px;">No practice requests yet.</p>';
+    return;
+  }
+  wrap.innerHTML = list.map((r,idx)=>{
+    const date = new Date(r.time);
+    return `
+    <div class="tutor-request">
+      <div>
+        <div style="font-weight:600;font-size:14.5px;color:var(--ink);">${r.student} <span style="color:var(--ink-soft);font-weight:400;">#${r.jersey.slice(0,2)}</span></div>
+        <div style="font-size:13px;color:var(--ink-soft);margin-top:2px;">${r.chapter}: ${r.topic}</div>
+        <div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;">${date.toLocaleDateString()} ${date.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</div>
+      </div>
+      <button class="btn btn-outline" style="padding:8px 14px;font-size:12.5px;" onclick="resolveRequest(${idx})">Mark done</button>
+    </div>`;
+  }).reverse().join('');
+}
+async function resolveRequest(idx){
+  const list = await getRequests();
+  list.splice(idx, 1);
+  await saveRequests(list);
+  loadTutorRequests();
+}
+
+/* ---- Speaking Practice ---- */
+function renderSpeaking(){
+  const wrap = document.getElementById('speaking-container');
+  wrap.innerHTML = speakingPractice.map((cat,ci)=>`
+    <div class="speak-category">
+      <h4>${cat.category}</h4>
+      ${cat.items.map((item,ii)=>{
+        const key = ci+'-'+ii;
+        const savedVal = (currentData.speaking && currentData.speaking[key]) || '';
+        return `
+        <div class="speak-item">
+          <div class="speak-template">${item.template}</div>
+          <div class="speak-instruction">${item.instruction}</div>
+          <input type="text" class="speak-input" id="speak-${key}" placeholder="tu respuesta..." value="${savedVal.replace(/"/g,'&quot;')}">
+          <div>
+            <button class="translate-toggle" onclick="toggleTranslation(this)">Show translation</button>
+            <div class="translate-text">${item.translation}</div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+  `).join('');
+
+  wrap.querySelectorAll('.speak-input').forEach(inp=>{
+    inp.addEventListener('input', e=>{
+      const key = e.target.id.replace('speak-','');
+      clearTimeout(e.target._t);
+      e.target._t = setTimeout(()=>{
+        if(!currentData.speaking) currentData.speaking = {};
+        currentData.speaking[key] = e.target.value;
+        saveStudentData(currentStudent.jersey, currentData);
+      }, 500);
+    });
+  });
+}
+
+/* ---- Checklist ---- */
+function renderChecklist(){
+  const wrap = document.getElementById('checklist-container');
+  wrap.innerHTML = defaultChecklist.map((item,i)=>{
+    const checked = currentData.checklist[i];
+    return `
+      <div class="checklist-item ${checked?'checked':''}" id="chk-${i}">
+        <input type="checkbox" ${checked?'checked':''} onchange="toggleChecklist(${i}, this.checked)">
+        <span>${item}</span>
+      </div>`;
+  }).join('');
+}
+function toggleChecklist(i, checked){
+  currentData.checklist[i] = checked;
+  document.getElementById('chk-'+i).classList.toggle('checked', checked);
+  saveStudentData(currentStudent.jersey, currentData);
+}
+
+/* ---- My Resources ---- */
+function renderMyResources(){
+  const wrap = document.getElementById('my-resources-container');
+  wrap.innerHTML = refCards.map(r=>`
+    <div class="card">
+      <span class="tag">${r.tag}</span>
+      <h3>${r.title}</h3>
+      <p>Same quick-reference from the general Resources page, pinned here for fast access.</p>
+      <span class="card-link" onclick="showView('resources')">Open in Resources →</span>
+    </div>
+  `).join('') + quizletDecks.map(d=>`
+    <div class="card">
+      <span class="tag">${d.tag} · Quizlet</span>
+      <h3>${d.title}</h3>
+      <p>Vocab flashcards for this chapter pairing.</p>
+      <a class="card-link" href="${d.url}" target="_blank" rel="noopener">Open deck →</a>
+    </div>
+  `).join('');
+}
+
+/* ============ INIT ============ */
+renderResources();
+renderRoster();
+</script>
+</body>
+</html>
