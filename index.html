@@ -495,6 +495,15 @@
   <div class="section" style="padding-top:48px;">
     <div class="section-head">
       <div class="eyebrow2">Tutor view</div>
+      <h2>Student Progress</h2>
+      <p>Live progress and completed items for everyone on the roster.</p>
+    </div>
+    <div id="tutor-progress"></div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="section-head">
+      <div class="eyebrow2">Tutor view</div>
       <h2>Practice Requests</h2>
       <p>When a student taps "Notify my tutor" on a topic, it shows up here with their name and jersey number. Mark it done once you've followed up.</p>
     </div>
@@ -1250,10 +1259,54 @@ function openTutorView(){
   if(pass === null) return;
   if(pass === TUTOR_PASSCODE){
     showView('tutor');
+    loadTutorProgress();
     loadTutorRequests();
   }else{
     alert('Incorrect passcode.');
   }
+}
+
+function computeProgressPct(data){
+  let total = 0, done = 0;
+  chapters.forEach(ch=>ch.topics.forEach(topic=>{
+    total++;
+    const q = data.quizzes && data.quizzes[ch.id+'__'+topic.id];
+    if(q && q.completed) done++;
+  }));
+  return total ? Math.round((done/total)*100) : 0;
+}
+function computeCompletedItems(data){
+  const completed = [];
+  chapters.forEach(ch=>ch.topics.forEach(topic=>{
+    const q = data.quizzes && data.quizzes[ch.id+'__'+topic.id];
+    if(q && q.completed) completed.push(ch.label+': '+topic.label);
+  }));
+  defaultChecklist.forEach((item,i)=>{
+    if(data.checklist && data.checklist[i]) completed.push(item);
+  });
+  return completed;
+}
+async function loadTutorProgress(){
+  const wrap = document.getElementById('tutor-progress');
+  wrap.innerHTML = '<p style="color:var(--ink-soft);font-size:14px;">Loading...</p>';
+  const cards = await Promise.all(students.map(async s=>{
+    const data = await loadStudentData(s.jersey);
+    const pct = computeProgressPct(data);
+    const completed = computeCompletedItems(data);
+    return `
+    <div class="progress-card" style="margin-bottom:16px;">
+      <div class="progress-top">
+        <span class="label">${s.name} <span style="color:var(--ink-soft);font-weight:400;">#${s.jersey.slice(0,2)}</span></span>
+        <span class="pct">${pct}%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+      ${completed.length ? `
+      <ul style="margin:14px 0 0;padding-left:18px;font-size:13px;color:var(--ink-soft);line-height:1.7;">
+        ${completed.map(c=>`<li>${c}</li>`).join('')}
+      </ul>` : `<p style="margin:14px 0 0;font-size:13px;color:var(--ink-soft);">No completed items yet.</p>`}
+    </div>`;
+  }));
+  wrap.innerHTML = cards.join('');
 }
 async function loadTutorRequests(){
   const wrap = document.getElementById('tutor-requests');
