@@ -362,7 +362,7 @@
   <div class="hero">
     <div class="hero-inner">
       <div class="eyebrow">Prep sessions · Cap. 1&ndash;6</div>
-      <h1>Get game-ready for Spanish&nbsp;2!</h1>
+      <h1>Get ready for Spanish&nbsp;2!</h1>
       <p>General practice materials for everyone, plus a personal page for each of you: quizzes, a progress bar, and a checklist so you can keep training even when we're not in session together.</p>
       <div class="hero-cta">
         <button class="btn btn-primary" onclick="showView('roster')">Enter My Page →</button>
@@ -432,7 +432,7 @@
       <div class="section-head">
         <div class="eyebrow2">Team Access</div>
         <h2>Find Your Card</h2>
-        <p>Tap your name, then enter your jersey number to open your personal page.</p>
+        <p>Log into your card for more personalized practice.</p>
       </div>
       <div class="grid grid-3" id="roster-cards"></div>
     </div>
@@ -590,6 +590,9 @@ const chapters = [
           {type:"fill", text:"Tú ___ (ser) muy trabajador.", answers:["eres"], translation:"You are very hardworking."},
           {type:"mc", text:"Mis compañeros ___ (ser) de varios estados.", options:["soy","es","son","eres"], answer:2, translation:"My teammates are from several states."},
           {type:"fill", text:"Yo ___ (ser) el capitán del equipo.", answers:["soy"], translation:"I am the team captain."},
+          {type:"fill", text:"¿De dónde ___ (ser) ustedes?", answers:["son"], translation:"Where are you all from?"},
+          {type:"mc", text:"Mi compañera de cuarto ___ (ser) muy generosa.", options:["es","son","eres","somos"], answer:0, translation:"My roommate is very generous."},
+          {type:"fill", text:"Nosotras ___ (ser) las capitanas del equipo.", answers:["somos"], translation:"We are the team captains."},
         ]
       },
       {
@@ -603,6 +606,9 @@ const chapters = [
           {type:"fill", text:"Mi compañero ___ (correr) cinco millas cada mañana.", answers:["corre"], translation:"My teammate runs five miles every morning."},
           {type:"mc", text:"Nosotros ___ (comer) juntos después del entrenamiento.", options:["come","comemos","comen","comes"], answer:1, translation:"We eat together after practice."},
           {type:"fill", text:"Yo ___ (vivir) cerca del campus.", answers:["vivo"], translation:"I live near campus."},
+          {type:"fill", text:"Tú ___ (asistir) a todas las clases de español.", answers:["asistes"], translation:"You attend all the Spanish classes."},
+          {type:"mc", text:"Ellos ___ (aprender) vocabulario nuevo cada semana.", options:["aprende","aprenden","aprendemos","aprendes"], answer:1, translation:"They learn new vocabulary every week."},
+          {type:"fill", text:"Yo ___ (compartir) apuntes con mis compañeros.", answers:["comparto"], translation:"I share notes with my teammates."},
         ]
       }
     ],
@@ -629,6 +635,9 @@ const chapters = [
           {type:"mc", text:"How do you say \"to be in a hurry\"?", options:["tener prisa","tener razón","tener suerte","tener frío"], answer:0, translation:"tener prisa = to be in a hurry."},
           {type:"fill", text:"Mi hermano ___ (tener) sed después de correr.", answers:["tiene"], translation:"My brother is thirsty after running."},
           {type:"mc", text:"\"Tenemos mucha suerte\" means...", options:["We have a lot of work","We are very lucky","We are very tired","We have a lot of time"], answer:1, translation:"Tenemos mucha suerte = We are very lucky."},
+          {type:"fill", text:"Tú ___ (tener) razón sobre el horario.", answers:["tienes"], translation:"You are right about the schedule."},
+          {type:"mc", text:"How do you say \"to be careful\"?", options:["tener cuidado","tener calor","tener éxito","tener ganas"], answer:0, translation:"tener cuidado = to be careful."},
+          {type:"fill", text:"Nosotros ___ (tener) ganas de descansar este fin de semana.", answers:["tenemos"], translation:"We feel like resting this weekend."},
         ]
       },
       {
@@ -640,6 +649,9 @@ const chapters = [
           {type:"mc", text:"Tú ___ (ir) a llegar tarde si no sales ahora.", options:["va","voy","vas","van"], answer:2, translation:"You are going to be late if you don't leave now."},
           {type:"fill", text:"Ella ___ (ir) a descansar después del partido.", answers:["va"], translation:"She is going to rest after the game."},
           {type:"mc", text:"Which is correct for \"I am going to travel this weekend\"?", options:["Voy a viajar este fin de semana","Voy viajar este fin de semana","Yo viajar a este fin de semana","Voy a viaje este fin de semana"], answer:0, translation:"I am going to travel this weekend."},
+          {type:"fill", text:"Mis compañeros ___ (ir) a llegar temprano al entrenamiento.", answers:["van"], translation:"My teammates are going to arrive early to practice."},
+          {type:"mc", text:"\"Vamos a repasar el vocabulario\" means...", options:["We reviewed the vocabulary","We are going to review the vocabulary","We review the vocabulary","We want to review the vocabulary"], answer:1, translation:"Vamos a repasar el vocabulario = We are going to review the vocabulary."},
+          {type:"fill", text:"¿Qué ___ (ir) a hacer tú después de clase?", answers:["vas"], translation:"What are you going to do after class?"},
         ]
       },
       {
@@ -651,6 +663,9 @@ const chapters = [
           {type:"fill", text:"Yo ___ (venir) a clase temprano.", answers:["vengo"], translation:"I come to class early."},
           {type:"mc", text:"Yo ___ (tener) mucho trabajo esta semana.", options:["tiengo","tengo","teno","tenio"], answer:1, translation:"I have a lot of work this week."},
           {type:"fill", text:"Yo ___ (traer) mi computadora a la biblioteca.", answers:["traigo"], translation:"I bring my computer to the library."},
+          {type:"fill", text:"Yo ___ (conocer) a todos mis compañeros de equipo.", answers:["conozco"], translation:"I know all my teammates."},
+          {type:"mc", text:"Yo ___ (dar) mi opinión en clase.", options:["doy","das","da","damos"], answer:0, translation:"I give my opinion in class."},
+          {type:"fill", text:"Yo ___ (ver) el partido todos los sábados.", answers:["veo"], translation:"I watch the game every Saturday."},
         ]
       }
     ],
@@ -679,6 +694,9 @@ const chapters = [
           {type:"mc", text:"Mis padres ___ orgullosos de mí. (feeling)", options:["son","es","están","está"], answer:2, translation:"My parents are proud of me."},
           {type:"fill", text:"La profesora ___ (estar) en su oficina ahora.", answers:["está"], translation:"The professor is in her office now."},
           {type:"mc", text:"¿Cómo ___ tú hoy? (feeling)", options:["eres","estás","es","está"], answer:1, translation:"How do you feel today?"},
+          {type:"mc", text:"El examen ___ el viernes. (event)", options:["está","es","están","son"], answer:1, translation:"The exam is on Friday."},
+          {type:"fill", text:"Los jugadores ___ (estar) listos para el partido.", answers:["están"], translation:"The players are ready for the game."},
+          {type:"mc", text:"Mi mejor amigo ___ alto y atlético. (characteristic)", options:["está","es","están","estás"], answer:1, translation:"My best friend is tall and athletic."},
         ]
       },
       {
@@ -690,6 +708,9 @@ const chapters = [
           {type:"fill", text:"A ti te ___ (gustar) estudiar por la noche.", answers:["gusta"], translation:"You like studying at night."},
           {type:"mc", text:"\"A ellos ___ mucho viajar.\"", options:["les gusta","le gusta","les gustan","les gustas"], answer:0, translation:"They really like to travel."},
           {type:"fill", text:"A mi compañero de equipo le ___ (encantar) la música.", answers:["encanta"], translation:"My teammate loves music."},
+          {type:"fill", text:"A mis padres les ___ (gustar) ver mis partidos.", answers:["gusta"], translation:"My parents like watching my games."},
+          {type:"mc", text:"A mí no ___ madrugar.", options:["me gusta","me gustan","le gusta","nos gusta"], answer:0, translation:"I don't like waking up early."},
+          {type:"fill", text:"A nosotros nos ___ (interesar) la cultura hispana.", answers:["interesa"], translation:"We are interested in Hispanic culture."},
         ]
       },
       {
@@ -701,6 +722,9 @@ const chapters = [
           {type:"mc", text:"Trabajamos ___ mejorar nuestro español. (purpose)", options:["por","desde","para","de"], answer:2, translation:"We work in order to improve our Spanish."},
           {type:"fill", text:"Caminamos ___ (por) el campus todos los días.", answers:["por"], translation:"We walk through campus every day."},
           {type:"mc", text:"Estudio español ___ el año 2023. (starting point in time)", options:["por","para","de","desde"], answer:3, translation:"I have studied Spanish since 2023."},
+          {type:"mc", text:"Compramos el regalo ___ nuestro entrenador. (recipient)", options:["por","para","de","desde"], answer:1, translation:"We bought the gift for our coach."},
+          {type:"fill", text:"Corro ___ (por) el parque los domingos.", answers:["por"], translation:"I run through the park on Sundays."},
+          {type:"mc", text:"Somos amigos ___ el primer año. (starting point in time)", options:["por","para","de","desde"], answer:3, translation:"We have been friends since freshman year."},
         ]
       }
     ],
@@ -736,11 +760,8 @@ const speakingPractice = [
 ];
 
 const defaultChecklist = [
-  "Meet with tutor to review Cap. 1–2",
-  "Review the Ser vs. Estar quick-reference",
-  "Study Cap. 3–4 vocab on Quizlet",
-  "Complete the Cap. 5–6 repaso worksheet",
-  "Practice writing 5 sentences using gustar",
+  ...quizletDecks.map(d => `Practiced the ${d.tag} Quizlet deck (${d.title})`),
+  ...refCards.map(r => `Reviewed the ${r.title} reference (${r.tag})`),
 ];
 
 /* Change this to whatever you want your tutor-dashboard passcode to be. */
